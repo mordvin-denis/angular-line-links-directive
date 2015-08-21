@@ -1,0 +1,48 @@
+
+.main.row {
+    min-height: 300px;
+}
+
+.item-block {
+    position: absolute;
+    min-height: 40px;
+    min-width: 30px;
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    border-radius: 15px;
+    background: #8AC007
+}
+
+.tab-pane {
+    padding: 10px;
+}
+
+/* set reference point */
+.tab-animation > .tab-content {
+    position: relative;
+}
+
+/* set animate effect */
+.tab-animation > .tab-content > .tab-pane{
+    transition: 0.2s linear opacity;
+}
+
+/* overwrite display: none and remove from document flow */
+.tab-animation > .tab-content > .tab-pane.active-remove {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: block;
+}
+
+/* opacity=0 when removing "active" class */
+.tab-animation > .tab-content > .tab-pane.active-remove-active {
+    opacity: 0;
+}
+
+/* opacity=0 when adding "active" class */
+.tab-animation > .tab-content > .tab-pane.active-add {
+    opacity: 0;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="../css/core.css">
+
+	<script type="text/javascript" src="../js/jquery.js"></script>
+	<script type="text/javascript" src="../js/angular.js"></script>
+	<script type="text/javascript" src="../js/fabric.js"></script>
+
+	<script type="text/javascript" src="../js/directives/lineLinksModule.js"></script>
+	<script type="text/javascript" src="../js/directives/dragModule.js"></script>
+	<script type="text/javascript" src="draggableLinkingSample.js"></script>
+
+</head>
+<body>
+	<h2>Linking sample with draggable divs</h2>
+
+	<div ng-app="DraggableSampleModule" ng-controller="DraggableSampleController">
+		<div class="main row" line-links-area>
+			<div class="item-block" ng-repeat="item in items"
+				 my-draggable left="item.left" top="item.top"
+				 line-link-object="item.id">
+				<h5>
+					{{item.title}}
+				</h5>
+
+				<span line-link-connect-to="dependency.id" line-link-color="dependency.color"
+					  on-selected="onSelected(item)"
+					  ng-repeat="dependency in item.dependencies">
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<pre>
+		<code class="language-html" data-lang="html">
+			&lt;div class="main row" line-links-area>
+			    &lt;div class="item-block" ng-repeat="item in items"
+				    my-draggable left="item.left" top="item.top"
+			        line-link-object="item.id">
+			        &lt;h5&gt;	{{item.title}} &lt/h5&gt;
+
+			        &lt;span line-link-connect-to="dependency"
+					  ng-repeat="dependency in item.dependencies"&gt;
+			        &lt;/span&gt;
+			    &lt;/div&gt;
+			&lt;/div&gt;
+		</code>
+	</pre>
+
+	<pre>
+		<code>
+			angular.module('StaticSampleModule', ['lineLinksModule'])
+			.controller('StaticSampleController', function ($scope) {
+			$scope.items = [
+				{id: 0, title: 'Programming language features', left: 500, top: 0},
+				{id: 1, title: 'Typing', left: 300, top: 70},
+				{id: 2, title: 'Paradigm', left: 800, top: 70},
+				{id: 3, title: 'Static', left: 100, top: 170},
+				{id: 4, title: 'Dynamic', left: 500, top: 170},
+
+				{id: 5, title: 'Procedural', left: 600, top: 170},
+				{id: 6, title: 'Functional', left: 700, top: 170},
+				{id: 7, title: 'OOP', left: 800, top: 170},
+				{id: 9, title: 'Structural', left: 900, top: 170}
+				];
+
+				$scope.items[1].dependencies = [$scope.items[0].id];
+				$scope.items[2].dependencies = [$scope.items[0].id];
+
+				$scope.items[3].dependencies = [$scope.items[1].id];
+				$scope.items[4].dependencies = [$scope.items[1].id];
+
+				$scope.items[5].dependencies = [$scope.items[2].id];
+				$scope.items[6].dependencies = [$scope.items[2].id];
+				$scope.items[7].dependencies = [$scope.items[2].id];
+				$scope.items[8].dependencies = [$scope.items[2].id];
+			});
+		</code>
+	</pre>
+</body>
+</html>
